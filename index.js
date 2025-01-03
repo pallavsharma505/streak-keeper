@@ -40,6 +40,7 @@ async function init() {
     await exec("git stage .", (err, stdout, stderr) => {});
     await exec('git commit -m "Test Commit"', (err, stdout, stderr) => {});
     await exec("git push -u origin main", (err, stdout, stderr) => {});
+    setTimeout(init, Math.random() * 3600000 * 2);
 }
 
 init();
