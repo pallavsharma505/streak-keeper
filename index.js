@@ -10,6 +10,7 @@ import { writeFileSync } from "fs";
 // 6. Push the commit to GitHub
 // 7. Repeat the process every 1 hour
 async function init() {
+	console.log("Fetching Article");
     const groqApiKey = process.env.GROQ_API_KEY;
     const modelId = "llama-3.3-70b-versatile";
     const url = "https://api.groq.com/openai/v1/chat/completions";
@@ -37,10 +38,13 @@ async function init() {
     const data = await response.json();
     const output = data.choices[0].message.content;
     writeFileSync("./data/" + new Date().getTime() + ".md", output);
+	console.log("Article Ready, pushing to git");
     await exec("git stage .", (err, stdout, stderr) => {});
     await exec('git commit -m "'+ new Date().getTime() + ".md" +'"', (err, stdout, stderr) => {});
     await exec("git push -u origin main", (err, stdout, stderr) => {});
-    setTimeout(init, Math.random() * 3600000 * 2);
+	const time = Math.random() * 3600000 * 2;
+    setTimeout(init, time);
+	console.log("Scheduled Next for:", time/60000, "mins");
 }
 
 init();
