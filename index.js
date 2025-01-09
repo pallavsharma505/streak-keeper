@@ -42,7 +42,7 @@ console.log(JSON.stringify(data, null, 4));
 	console.log("Article Ready, pushing to git");
     await exec("git stage .", (err, stdout, stderr) => {console.log(stdout)});
     await exec('git commit -m "'+ new Date().getTime() + ".md" +'"', (err, stdout, stderr) => {console.log(stdout)});
-    await exec("git push", (err, stdout, stderr) => {console.log(stdout)});
+    await exec("git push", (err, stdout, stderr) => {console.log(stderr)});
 	const time = Math.random() * 3600000 * 2;
     setTimeout(init, time);
 	console.log("Scheduled Next for:", time/60000, "mins");
