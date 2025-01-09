@@ -12,7 +12,7 @@ import { writeFileSync } from "fs";
 async function init() {
 	console.log("Fetching Article");
     const groqApiKey = process.env.GROQ_API_KEY;
-    const modelId = "llama-3.3-70b-versatile";
+    const modelId = "llama3-8b-8192";
     const url = "https://api.groq.com/openai/v1/chat/completions";
     const body = {
         model: modelId,
@@ -36,6 +36,7 @@ async function init() {
         body: JSON.stringify(body),
     });
     const data = await response.json();
+console.log(JSON.stringify(data, null, 4));
     const output = data.choices[0].message.content;
     writeFileSync("./data/" + new Date().getTime() + ".md", output);
 	console.log("Article Ready, pushing to git");
