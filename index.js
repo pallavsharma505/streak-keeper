@@ -7,7 +7,7 @@ import { writeFileSync } from "fs";
 // 3. Write the article to a file
 // 4. Stage the file with Git
 // 5. Commit the file with Git
-// 6. Push the commit to GitHub  
+// 6. Push the commit to GitHub
 // 7. Repeat the process every 1 hour
 async function init() {
 	console.log("Fetching Article");
